@@ -36,6 +36,16 @@ export class StudentTableComponent implements OnInit {
     };
     this.router.navigate(["editStudent"], navigationExtras);
   }
+  initializeDB() {
+    this.service.initializeDB().subscribe(
+      (response) => {
+        console.log("DB is Initialized");
+      },
+      (error) => {
+        console.log("ERROR - ", error);
+      }
+    );
+  }
 
   getStudentData() {
     this.service.getStudentData().subscribe(
@@ -46,15 +56,6 @@ export class StudentTableComponent implements OnInit {
         console.log("ERROR - ", error);
       }
     );
-  }
-
-  deleteStudent(itemid) {
-    const student = {
-      id: itemid,
-    };
-    this.service.deleteStudent(student).subscribe((response) => {
-      this.getStudentData();
-    });
   }
 
   search(value) {
@@ -69,5 +70,13 @@ export class StudentTableComponent implements OnInit {
       });
       this.studentData = foundItems;
     }
+  }
+  deleteStudent(itemid) {
+    const student = {
+      id: itemid,
+    };
+    this.service.deleteStudent(student).subscribe((response) => {
+      this.getStudentData();
+    });
   }
 }

@@ -21,7 +21,7 @@ const knex_db = require("./db-config");
 const dbinitialize = async () => {
   testBase.resetDatabase(knex_db);
 };
-// teacher crud operations
+// teacher crud operations///////////////
 const readTeachers = async () => {
   const sql = `SELECT * FROM teacher`;
   return new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ const addTeacher = async (id, name, age) => {
 };
 
 const updateTeacher = async (name, age, id) => {
-  const sql = `UPDATE teacher SET name=?, age=? WHERE id=?`;
+  const sql = `UPDATE teacher SET name=?,age=? WHERE id=?`;
   return new Promise((resolve, reject) => {
     knex_db
       .raw(sql, [name, age, id])
@@ -92,6 +92,7 @@ const deleteTeacher = async (id) => {
   });
 };
 // student crud operation
+
 const readStudents = async () => {
   const sql = `SELECT * FROM student`;
   return new Promise((resolve, reject) => {
@@ -121,7 +122,7 @@ const readStudentInfo = async (id) => {
 };
 
 const addStudent = async (id, name, age, homeTown) => {
-  const sql = `INSERT INTO student(id,name,age,homeTown) values (?, ?, ?,?)`;
+  const sql = `INSERT INTO student(id,name,age,homeTown) values (?, ?, ?, ?)`;
   return new Promise((resolve, reject) => {
     knex_db
       .raw(sql, [id, name, age, homeTown])
@@ -134,11 +135,11 @@ const addStudent = async (id, name, age, homeTown) => {
   });
 };
 
-const updateStudent = async (name, age, homeTown, id) => {
-  const sql = `UPDATE student SET name=?, age=?,homeTown=? WHERE id=?`;
+const updateStudent = async (name, age, hometown, id) => {
+  const sql = `UPDATE student SET name=?,age=?,hometown=? WHERE id=?`;
   return new Promise((resolve, reject) => {
     knex_db
-      .raw(sql, [name, age, homeTown, id])
+      .raw(sql, [name, age, hometown, id])
       .then(() => {
         resolve({ status: "Successfully updated Student" });
       })
@@ -161,15 +162,19 @@ const deleteStudent = async (id) => {
       });
   });
 };
+
 module.exports = {
-  readTeachers,
-  readStudents,
-  addStudent,
+  //teacher crud
   addTeacher,
-  deleteTeacher,
-  deleteStudent,
-  readStudentInfo,
+  readTeachers,
   readTeacherInfo,
-  updateStudent,
   updateTeacher,
+  deleteTeacher,
+
+  //student crud
+  addStudent,
+  readStudents,
+  readStudentInfo,
+  updateStudent,
+  deleteStudent,
 };
