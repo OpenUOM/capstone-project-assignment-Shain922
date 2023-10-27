@@ -15,9 +15,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
-          ref: node16 # Specify Node.js version 16
-
-      - name: Autograding
-        uses: education/autograding@v1
-        with:
-          ref: node16 # Specify Node.js version 16
+          ref: node16 
